@@ -1,9 +1,11 @@
 .venv/
-
 __pycache__/
-
-*.db
-
-.ipynb_checkpoints/
+*.pyc
 
 .vscode/
+
+postgres_data/
+
+.env
+
+*.db

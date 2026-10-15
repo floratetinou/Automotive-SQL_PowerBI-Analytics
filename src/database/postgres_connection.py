@@ -8,7 +8,7 @@ def get_connection():
         port="5432",
         database="automotive",
         user="postgres",
-        password="Flora1998+"
+        password="xxx"
     )
 
     return conn

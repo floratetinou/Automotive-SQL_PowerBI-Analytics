@@ -8,7 +8,7 @@ try:
         port="5432",
         database="automotive",
         user="postgres",
-        password="Flora1998+"
+        password="xxx"
     )
 
     print("✅ Verbindung erfolgreich")

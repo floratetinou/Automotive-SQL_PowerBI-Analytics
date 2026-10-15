@@ -321,7 +321,7 @@ The Streamlit application provides a Python-based interactive view of the same a
 Add a screenshot after placing the image in the `screenshots` directory:
 
 ```markdown
-![Streamlit Dashboard](screenshots/streamlit_dashboard.png)
+![Streamlit Dashboard](Output/streamlit_dashboard.pdf)
 ```
 
 ## Security Notes

@@ -308,29 +308,18 @@ The Power BI report connects to PostgreSQL and presents:
 - Detailed test-result table
 - Interactive filters by vehicle and test result
 
-Add a screenshot after placing the image in the `screenshots` directory:
-
 ```markdown
-![Power BI Dashboard](screenshots/powerbi_dashboard.png)
+![Power BI Dashboard](output/powerbi_dashboard.png)
 ```
 
 ## Streamlit Dashboard
 
 The Streamlit application provides a Python-based interactive view of the same automotive test analytics.
 
-Add a screenshot after placing the image in the `screenshots` directory:
 
 ```markdown
-![Streamlit Dashboard](Output/streamlit_dashboard.pdf)
+![Streamlit Dashboard](output/streamlit_dashboard.pdf)
 ```
-
-## Security Notes
-
-- Never commit PostgreSQL passwords or other credentials.
-- Keep `.env` in `.gitignore`.
-- Do not upload confidential company data, VINs, test results, or proprietary code.
-- Use synthetic sample data for the public GitHub repository.
-- Review Power BI files and screenshots before publishing them.
 
 ## Learning Outcomes
 

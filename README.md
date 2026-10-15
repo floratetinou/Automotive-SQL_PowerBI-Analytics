@@ -1,19 +1,12 @@
 # Automotive SQL & Power BI Analytics Platform
 
-## Overview
+## Project Overview
 
-This end-to-end data analytics project uses an automotive testing use case to demonstrate how data moves from a relational database to analysis and interactive dashboards.
+This portfolio project demonstrates an end-to-end automotive test-data analytics workflow. It began as a SQL learning project with SQLite and was then extended to PostgreSQL, Python/Pandas analytics, Streamlit, Power BI, Git, GitHub, Docker, and Docker Compose.
 
-The project was developed progressively:
+The application stores vehicles, test cases, test runs, and detected errors. SQL queries combine these relational tables and prepare KPIs for interactive dashboards.
 
-1. Database design and SQL learning with SQLite
-2. Migration from SQLite to PostgreSQL
-3. Data analysis and KPI calculation with Python and Pandas
-4. Interactive dashboard development with Streamlit
-5. Business reporting with Power BI
-6. Containerization of the application and PostgreSQL with Docker and Docker Compose
-
-## Technologies
+## Technology Stack
 
 - Python
 - SQL
@@ -24,26 +17,40 @@ The project was developed progressively:
 - Power BI
 - Docker
 - Docker Compose
-- psycopg2
-- SQLAlchemy
+- Git and GitHub
+
+## Project Development Stages
+
+1. Created the first relational database with SQLite
+2. Defined tables, primary keys, and foreign keys
+3. Inserted synthetic automotive test data with Python
+4. Implemented SQL queries with filters, sorting, aggregations, and joins
+5. Calculated analytics KPIs with Pandas
+6. Exported reporting datasets to CSV
+7. Created an interactive Streamlit dashboard
+8. Created a Power BI report
+9. Migrated the database layer from SQLite to PostgreSQL
+10. Connected Power BI directly to PostgreSQL
+11. Created a Docker image for the Python application
+12. Started PostgreSQL as a persistent Docker Compose service
+13. Published the project to GitHub
 
 ## Main Features
 
-- Relational database model for automotive test data
-- Vehicle, test-case, test-run, and error management
+- Relational automotive test-data model
+- SQLite and PostgreSQL implementations
 - Parameterized SQL queries from Python
-- Data filtering, sorting, grouping, and aggregation
-- Multi-table SQL joins
-- Automated KPI calculation
+- Data filtering and sorting
+- SQL aggregations and grouped reporting
+- Two-table and three-table joins
+- KPI calculation with Pandas
 - CSV report generation
-- Interactive Streamlit dashboard
+- Streamlit dashboard
 - Power BI dashboard connected to PostgreSQL
-- Docker image for the Python application
-- PostgreSQL container with persistent storage
+- Dockerized Python environment
+- PostgreSQL container with persistent Docker storage
 
 ## Data Model
-
-The platform uses four principal tables:
 
 ### `vehicles`
 
@@ -64,7 +71,7 @@ Stores test-case definitions:
 
 ### `test_runs`
 
-Stores executed test runs:
+Stores executed tests and connects vehicles with test cases:
 
 - `run_id`
 - `vehicle_id`
@@ -84,20 +91,18 @@ Stores errors associated with test runs:
 ## Database Relationships
 
 ```text
-vehicles (1) ────────< test_runs >──────── (1) test_cases
-                          |
-                          |
-                          v
-                       errors
+vehicles (1) --------< test_runs >-------- (1) test_cases
+                           |
+                           |
+                           v
+                        errors
 ```
 
 - One vehicle can have multiple test runs.
-- One test case can be executed in multiple test runs.
-- One test run can be associated with error records.
+- One test case can be used in multiple test runs.
+- One test run can have associated error records.
 
 ## SQL Skills Demonstrated
-
-The project contains practical examples of:
 
 - `CREATE TABLE`
 - `INSERT INTO`
@@ -112,7 +117,7 @@ The project contains practical examples of:
 - Foreign keys
 - Parameterized queries
 
-Example query:
+Example three-table join:
 
 ```sql
 SELECT
@@ -127,19 +132,20 @@ INNER JOIN test_cases
     ON test_runs.testcase_id = test_cases.testcase_id;
 ```
 
-## Analytics and KPIs
+## Analytics KPIs
 
-The Python analytics layer calculates:
+The analytics layer calculates:
 
-- Total number of vehicles
-- Total number of executed tests
+- Total vehicles
+- Total executed tests
 - Pass rate
 - Failure rate
 - Failed tests per vehicle
-- Vehicle with the highest number of failed tests
-- Test distribution by result and category
+- Vehicle with the most failed tests
+- Test-result distribution
+- Test cases per category
 
-## Architecture
+## Application Architecture
 
 ```text
 SQLite / PostgreSQL
@@ -150,67 +156,81 @@ SQLite / PostgreSQL
         v
   Pandas Analytics
         |
-        +-------------------+
-        |                   |
-        v                   v
-Streamlit Dashboard     Power BI Dashboard
+        +----------------------+
+        |                      |
+        v                      v
+Streamlit Dashboard      Power BI Dashboard
         |
         v
  Docker / Docker Compose
 ```
 
-## Project Structure
+## Repository Structure
+
+The structure below reflects the current project shown in the repository:
 
 ```text
 Automotive_SQL_PowerBI/
 |
-├── dashboard/
-│   └── app.py
+|-- dashboard/
+|   |-- __init__.py
+|   `-- app.py
 |
-├── reports/
-│   ├── export_csv.py
-│   └── output/
+|-- data/
 |
-├── screenshots/
-│   ├── streamlit_dashboard.png
-│   └── powerbi_dashboard.png
+|-- docs/
+|   `-- project_plan.md
 |
-├── src/
-│   ├── database/
-│   │   ├── __init__.py
-│   │   ├── postgres_connection.py
-│   │   └── sqlite_connection.py
-│   ├── __init__.py
-│   ├── analytics.py
-│   ├── create_database.py
-│   ├── create_postgres_tables.py
-│   ├── insert_sample_data.py
-│   ├── insert_postgres_data.py
-│   ├── sql_queries.py
-│   └── sql_queries_postgres.py
+|-- powerbi/
+|   `-- README.md
 |
-├── .dockerignore
-├── .gitignore
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-└── README.md
+|-- reports/
+|   |-- output/
+|   |   |-- dashboard_summary.csv
+|   |   |-- failed_tests_per_vehicle.csv
+|   |   |-- PowerBI_Darstellung.png
+|   |   |-- Streamlit_dashboard.pdf
+|   |   `-- vehicle_test_results.csv
+|   `-- export_csv.py
+|
+|-- src/
+|   |-- database/
+|   |   |-- __init__.py
+|   |   |-- postgres_connection.py
+|   |   `-- sqlite_connection.py
+|   |-- __init__.py
+|   |-- analytics.py
+|   |-- create_database.py
+|   |-- create_postgres_database.py
+|   |-- database_connection.py
+|   |-- insert_postgres_data.py
+|   |-- insert_sample_data.py
+|   |-- sql_queries_postgres.py
+|   |-- sql_queries.py
+|   `-- test_postgres_connection.py
+|
+|-- .dockerignore
+|-- .gitignore
+|-- automotive.db
+|-- docker-compose.yml
+|-- Dockerfile
+|-- README.md
+|-- requirements.txt
+`-- test_setup.py
 ```
 
-> The exact file names can be adjusted to match the current repository structure.
+Generated directories such as `.venv/` and `__pycache__/` are local development artifacts and should not be committed.
 
-## Local Setup
+## Local Installation
 
 ### 1. Clone the repository
 
-```bash
-git clone <REPOSITORY_URL>
-cd Automotive_SQL_PowerBI
+```powershell
+git clone https://github.com/floratetinou/Automotive-SQL_PowerBI-Analytics.git
+cd Automotive-SQL_PowerBI-Analytics
 ```
 
-### 2. Create a virtual environment
-
-Windows PowerShell:
+### 2. Create and activate a virtual environment
 
 ```powershell
 python -m venv .venv
@@ -223,47 +243,96 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### 4. Configure PostgreSQL credentials
+## SQLite Workflow
 
-Do not store database passwords directly in source code or commit them to GitHub.
-
-Create a local `.env` file and add it to `.gitignore`:
-
-```text
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_DB=automotive
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_password
-```
-
-### 5. Create the PostgreSQL tables
+Create the SQLite database and tables:
 
 ```powershell
-python -m src.create_postgres_tables
+python -m src.create_database
 ```
 
-### 6. Insert sample data
+Insert the SQLite sample data:
+
+```powershell
+python -m src.insert_sample_data
+```
+
+Run the SQLite queries if `src/sql_queries.py` is configured for SQLite:
+
+```powershell
+python -m src.sql_queries
+```
+
+## PostgreSQL Workflow
+
+PostgreSQL must be running before the following commands are used.
+
+Create the PostgreSQL tables:
+
+```powershell
+python -m src.create_postgres_database
+```
+
+Insert the PostgreSQL sample data:
 
 ```powershell
 python -m src.insert_postgres_data
 ```
 
-### 7. Run the analytics module
+Run the PostgreSQL queries:
+
+```powershell
+python -m src.sql_queries_postgres
+```
+
+Run the KPI analytics:
 
 ```powershell
 python -m src.analytics
 ```
 
-### 8. Start the Streamlit dashboard
+## Streamlit Dashboard
+
+Start the dashboard from the repository root:
 
 ```powershell
 streamlit run dashboard/app.py
 ```
 
-## Docker Setup
+The Streamlit dashboard displays the automotive KPIs and test-analysis tables generated from the database.
 
-### Build the application image
+[Open the Streamlit dashboard PDF](reports/output/Streamlit_dashboard.pdf)
+
+> GitHub does not embed a PDF with normal Markdown image syntax. The line above therefore links to the PDF instead of attempting to display it as an image.
+
+## Power BI Dashboard
+
+The Power BI report uses PostgreSQL data to visualize:
+
+- Total vehicles
+- Total tests
+- Pass rate
+- Failure rate
+- Failed tests per vehicle
+- Passed versus failed tests
+- Detailed test results
+- Interactive filters
+
+![Power BI Dashboard](reports/output/PowerBI_Darstellung.png)
+
+## CSV Reporting
+
+Generate or refresh the CSV reporting files with:
+
+```powershell
+python -m reports.export_csv
+```
+
+The generated reporting files are stored in `reports/output/`.
+
+## Docker
+
+### Build the Python application image
 
 ```powershell
 docker build -t automotive-analytics .
@@ -293,65 +362,76 @@ docker logs automotive-postgres
 docker compose down
 ```
 
-The PostgreSQL Docker volume keeps database data persistent when the container is stopped and restarted.
+The configured Docker volume preserves PostgreSQL data when the PostgreSQL container is stopped and restarted.
 
-## Power BI Dashboard
+## Important Docker Networking Note
 
-The Power BI report connects to PostgreSQL and presents:
+Inside a Docker container, `localhost` refers to that container, not to the Windows host and not to another container.
 
-- Total Vehicles
-- Total Tests
-- Pass Rate
-- Failure Rate
-- Failed Tests per Vehicle
-- Passed vs. Failed Tests
-- Detailed test-result table
-- Interactive filters by vehicle and test result
+When the Python application and PostgreSQL both run through Docker Compose, the Python application must use the PostgreSQL service name from `docker-compose.yml` as the database host, for example:
 
-```markdown
-![Power BI Dashboard](output/powerbi_dashboard.png)
+```text
+postgres
 ```
 
-## Streamlit Dashboard
+It must not use:
 
-The Streamlit application provides a Python-based interactive view of the same automotive test analytics.
+```text
+localhost
+```
 
+## Security
 
-```markdown
-![Streamlit Dashboard](output/streamlit_dashboard.pdf)
+- Never commit database passwords, secrets, or tokens.
+- Do not hard-code PostgreSQL credentials in `postgres_connection.py`.
+- Store credentials in environment variables or a local `.env` file.
+- Keep `.env`, `.venv/`, `__pycache__/`, `*.pyc`, and local database files in `.gitignore`.
+- Use only synthetic automotive data in a public portfolio repository.
+- Do not publish company test data, real VINs, internal screenshots, or proprietary source code.
+
+Example environment variable names:
+
+```text
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=automotive
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=your_password
 ```
 
 ## Learning Outcomes
 
-This project demonstrates practical experience with:
+This project demonstrates practical experience in:
 
-- Relational data modeling
-- SQL querying and joins
-- SQLite and PostgreSQL
+- Relational database modeling
+- SQL querying and multi-table joins
+- SQLite development
+- PostgreSQL development and migration
 - Python database integration
-- Data analysis with Pandas
-- KPI design and calculation
+- Pandas data analysis
+- KPI design
 - Streamlit dashboard development
 - Power BI reporting
 - Docker images and containers
-- Docker Compose and persistent PostgreSQL storage
+- Docker Compose
+- Git and GitHub workflows
 
 ## Future Improvements
 
-- Use SQLAlchemy throughout the application
-- Move all credentials to environment variables
-- Add database migrations
-- Add data-validation rules
+- Use SQLAlchemy consistently for PostgreSQL connections
+- Move every credential to environment variables
+- Add validation constraints for test results and severity values
 - Add automated tests with `pytest`
 - Add a larger synthetic automotive dataset
-- Add additional Power BI pages and DAX measures
-- Containerize the Streamlit application together with PostgreSQL
-- Add continuous integration with GitHub Actions
+- Add DAX measures and additional Power BI pages
+- Run the Python application and PostgreSQL together with Docker Compose
+- Add health checks for the PostgreSQL service
+- Add GitHub Actions for automated quality checks
 
 ## Author
 
 Flora Tetinou-Sawouo
 
-## License
+## Disclaimer
 
-This repository is intended as a learning and portfolio project. Add an open-source license before permitting reuse or redistribution.
+This repository is a learning and portfolio project. The included data should be synthetic and must not contain confidential company information.

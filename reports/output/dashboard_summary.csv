@@ -1,0 +1,4 @@
+total_vehicles,total_tests,pass_rate,failure_rate,worst_vehicle
+3,4,50,50,"model           Tiguan
+failed_tests         1
+Name: 0, dtype: object"

@@ -1,0 +1,22 @@
+services:
+
+  postgres:
+
+    image: postgres:17
+
+    container_name: automotive-postgres
+
+    environment:
+      POSTGRES_DB: automotive
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Flora1998+
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:

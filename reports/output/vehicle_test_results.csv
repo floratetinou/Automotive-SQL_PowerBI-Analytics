@@ -1,0 +1,5 @@
+model,test_case,result,test_date
+Golf 8,Lane Assist,PASSED,2026-10-14
+Golf 8,Emergency Braking,FAILED,2026-10-14
+ID.4,Lane Assist,PASSED,2026-10-14
+Tiguan,Traffic Sign Detection,FAILED,2026-10-14
